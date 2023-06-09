@@ -22,9 +22,13 @@ public final class VirtualWorld extends PApplet {
     public static final String FAST_FLAG = "-fast";
     public static final String FASTER_FLAG = "-faster";
     public static final String FASTEST_FLAG = "-fastest";
+    public static final String FAST4_FLAG = "-f";
+
     public static final double FAST_SCALE = 0.5;
     public static final double FASTER_SCALE = 0.25;
     public static final double FASTEST_SCALE = 0.10;
+    public static final double FAST4_SCALE = 0.01;
+
 
     public String loadFile = "world.sav";
     public long startTimeMillis = 0;
@@ -55,13 +59,13 @@ public final class VirtualWorld extends PApplet {
 
     public void draw() {
         double appTime = (System.currentTimeMillis() - startTimeMillis) * 0.001;
-        double frameTime = appTime/ timeScale - scheduler.currentTime;
+        double frameTime = appTime/ timeScale - scheduler.getCurrentTime();
         this.update(frameTime);
-        Functions.drawViewport(view);
+        WorldView.drawViewport(view);
     }
 
     public void update(double frameTime){
-        Functions.updateOnTime(scheduler, frameTime);
+        scheduler.updateOnTime(frameTime);
     }
 
     // Just for debugging and for P5
@@ -70,22 +74,32 @@ public final class VirtualWorld extends PApplet {
         Point pressed = mouseToPoint();
         System.out.println("CLICK! " + pressed.x + ", " + pressed.y);
 
-        Optional<Entity> entityOptional = Functions.getOccupant(world, pressed);
+        Optional<Entity> entityOptional = world.getOccupant(pressed);
         if (entityOptional.isPresent()) {
             Entity entity = entityOptional.get();
-            System.out.println(entity.id + ": " + entity.kind + " : " + entity.health);
+            if (entity instanceof Tree) {
+                System.out.println(entity.getId() + ": " + entity.getClass() + " : " + ((Tree) entity).getHealth());
+            }
+            else if (entity instanceof Sapling) {
+                System.out.println(entity.getId() + ": " + entity.getClass() + " : " + ((Sapling) entity).getHealth());
+            }
+            else {
+                System.out.println(entity.getId() + ": " + entity.getClass() + " : " + "0");
+            }
         }
 
     }
 
     public void scheduleActions(WorldModel world, EventScheduler scheduler, ImageStore imageStore) {
         for (Entity entity : world.entities) {
-            Functions.scheduleActions(entity, scheduler, world, imageStore);
+            if ((entity instanceof Schedulable)){            
+                ((Schedulable) entity).scheduleActions(scheduler, world, imageStore);
+            }
         }
     }
 
     private Point mouseToPoint() {
-        return Functions.viewportToWorld(view.viewport, mouseX / TILE_WIDTH, mouseY / TILE_HEIGHT);
+        return Viewport.viewportToWorld(view.viewport, mouseX / TILE_WIDTH, mouseY / TILE_HEIGHT);
     }
 
     public void keyPressed() {
@@ -99,15 +113,15 @@ public final class VirtualWorld extends PApplet {
                 case LEFT -> dx -= 1;
                 case RIGHT -> dx += 1;
             }
-            Functions.shiftView(view, dx, dy);
+            Viewport.shiftView(view, dx, dy);
         }
     }
 
-    public static Background createDefaultBackground(ImageStore imageStore) {
-        return new Background(DEFAULT_IMAGE_NAME, Functions.getImageList(imageStore, DEFAULT_IMAGE_NAME));
+    public Background createDefaultBackground(ImageStore imageStore) {
+        return new Background(DEFAULT_IMAGE_NAME, ImageStore.getImageList(imageStore, DEFAULT_IMAGE_NAME));
     }
 
-    public static PImage createImageColored(int width, int height, int color) {
+    public PImage createImageColored(int width, int height, int color) {
         PImage img = new PImage(width, height, RGB);
         img.loadPixels();
         Arrays.fill(img.pixels, color);
@@ -119,7 +133,7 @@ public final class VirtualWorld extends PApplet {
         this.imageStore = new ImageStore(createImageColored(TILE_WIDTH, TILE_HEIGHT, DEFAULT_IMAGE_COLOR));
         try {
             Scanner in = new Scanner(new File(filename));
-            Functions.loadImages(in, imageStore,this);
+            ImageStore.loadImages(in, imageStore,this);
         } catch (FileNotFoundException e) {
             System.err.println(e.getMessage());
         }
@@ -129,10 +143,10 @@ public final class VirtualWorld extends PApplet {
         this.world = new WorldModel();
         try {
             Scanner in = new Scanner(new File(file));
-            Functions.load(world, in, imageStore, createDefaultBackground(imageStore));
+            world.load(in, imageStore, createDefaultBackground(imageStore));
         } catch (FileNotFoundException e) {
             Scanner in = new Scanner(file);
-            Functions.load(world, in, imageStore, createDefaultBackground(imageStore));
+            world.load(in, imageStore, createDefaultBackground(imageStore));
         }
     }
 
@@ -142,6 +156,7 @@ public final class VirtualWorld extends PApplet {
                 case FAST_FLAG -> timeScale = Math.min(FAST_SCALE, timeScale);
                 case FASTER_FLAG -> timeScale = Math.min(FASTER_SCALE, timeScale);
                 case FASTEST_FLAG -> timeScale = Math.min(FASTEST_SCALE, timeScale);
+                case FAST4_FLAG -> timeScale = Math.min(FAST4_SCALE, timeScale);
                 default -> loadFile = arg;
             }
         }
