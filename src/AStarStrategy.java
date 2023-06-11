@@ -31,7 +31,6 @@ class AStarStrategy implements PathingStrategy {
      * @param potentialNeighbors a function that returns the neighbors of a given point, as a stream
      */
 
-    // Set<Point> closedSet = new HashSet<>();
 
     public List<Point> computePath(
             Point start,
@@ -57,7 +56,6 @@ class AStarStrategy implements PathingStrategy {
             while (!openSet.isEmpty()) {
                 Point cur = openSet.poll();  // poll the lowest f-value neighbor
                 closedSet.add(cur);
-                // System.out.println(cur); // test helper
 
                 // if target found return path
                 if (withinReach.test(cur, end)) {

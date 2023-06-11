@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import processing.core.*;
 
@@ -87,7 +89,7 @@ public final class VirtualWorld extends PApplet {
                 System.out.println(entity.getId() + ": " + entity.getClass() + " : " + "0");
             }
         }
-
+        Phenomenon.terraform("portal", world, imageStore, pressed);
     }
 
     public void scheduleActions(WorldModel world, EventScheduler scheduler, ImageStore imageStore) {
@@ -118,7 +120,7 @@ public final class VirtualWorld extends PApplet {
     }
 
     public Background createDefaultBackground(ImageStore imageStore) {
-        return new Background(DEFAULT_IMAGE_NAME, ImageStore.getImageList(imageStore, DEFAULT_IMAGE_NAME));
+        return new Background(DEFAULT_IMAGE_NAME, imageStore.getImageList(DEFAULT_IMAGE_NAME));
     }
 
     public PImage createImageColored(int width, int height, int color) {
@@ -133,7 +135,7 @@ public final class VirtualWorld extends PApplet {
         this.imageStore = new ImageStore(createImageColored(TILE_WIDTH, TILE_HEIGHT, DEFAULT_IMAGE_COLOR));
         try {
             Scanner in = new Scanner(new File(filename));
-            ImageStore.loadImages(in, imageStore,this);
+            this.imageStore.loadImages(in, this);
         } catch (FileNotFoundException e) {
             System.err.println(e.getMessage());
         }

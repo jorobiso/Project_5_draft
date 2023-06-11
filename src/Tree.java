@@ -49,7 +49,7 @@ public class Tree extends Wiggler {
     @Override
     public boolean transform(WorldModel world, EventScheduler scheduler, ImageStore imageStore) {
         if (this.getHealth() <= 0) {
-            Stump stump = new Stump(Entity.getSTUMP_KEY() + "_" + this.getId(), this.getPosition(), ImageStore.getImageList(imageStore, Entity.getSTUMP_KEY()));
+            Stump stump = new Stump(Entity.getSTUMP_KEY() + "_" + this.getId(), this.getPosition(), imageStore.getImageList(Entity.getSTUMP_KEY()));
             world.removeEntity(this, scheduler);
             world.addEntity(stump);
             return true;

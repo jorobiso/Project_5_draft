@@ -48,15 +48,15 @@ public final class ImageStore {
         img.updatePixels();
     }
 
-    public static List<PImage> getImageList(ImageStore imageStore, String key) {
-        return imageStore.images.getOrDefault(key, imageStore.defaultImages);
+    public List<PImage> getImageList(String key) {
+        return this.images.getOrDefault(key, this.defaultImages);
     }
 
-    public static void loadImages(Scanner in, ImageStore imageStore, PApplet screen) {
+    public void loadImages(Scanner in, PApplet screen) {
         int lineNumber = 0;
         while (in.hasNextLine()) {
             try {
-                Viewport.processImageLine(imageStore.images, in.nextLine(), screen);
+                Viewport.processImageLine(this.images, in.nextLine(), screen);
             } catch (NumberFormatException e) {
                 System.out.printf("Image format error on line %d\n", lineNumber);
             }

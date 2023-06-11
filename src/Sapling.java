@@ -45,7 +45,7 @@ public class Sapling extends Wiggler {
     @Override
     public boolean transform(WorldModel world, EventScheduler scheduler, ImageStore imageStore) {
         if (this.getHealth() < 0) {
-            Stump stump = new Stump(Stump.getSTUMP_KEY() + "_" + this.getId(), this.getPosition(), ImageStore.getImageList(imageStore, Stump.getSTUMP_KEY()));
+            Stump stump = new Stump(Stump.getSTUMP_KEY() + "_" + this.getId(), this.getPosition(), imageStore.getImageList(Stump.getSTUMP_KEY()));
     
             world.removeEntity(this, scheduler);
     
@@ -53,7 +53,7 @@ public class Sapling extends Wiggler {
     
             return true;
         } else if (this.getHealth() >= this.getHealthLimit()) {
-            Tree tree = new Tree(Tree.getTREE_KEY() + "_" + this.getId(), getPosition(), ImageStore.getImageList(imageStore, Tree.getTREE_KEY()), Background.getNumFromRange(getTREE_ACTION_MAX(), getTREE_ACTION_MIN()), Background.getNumFromRange(getTREE_ANIMATION_MAX(), getTREE_ANIMATION_MIN()), Background.getIntFromRange(getTREE_HEALTH_MAX(), getTREE_HEALTH_MIN()));
+            Tree tree = new Tree(Tree.getTREE_KEY() + "_" + this.getId(), getPosition(), imageStore.getImageList(Tree.getTREE_KEY()), Background.getNumFromRange(getTREE_ACTION_MAX(), getTREE_ACTION_MIN()), Background.getNumFromRange(getTREE_ANIMATION_MAX(), getTREE_ANIMATION_MIN()), Background.getIntFromRange(getTREE_HEALTH_MAX(), getTREE_HEALTH_MIN()));
 
             world.removeEntity(this, scheduler);
             world.addEntity(tree);

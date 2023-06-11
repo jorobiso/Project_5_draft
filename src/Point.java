@@ -1,5 +1,7 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * A simple class representing a location in 2D space.
@@ -84,4 +86,36 @@ public final class Point {
             return Optional.of(nearest);
         }
     }
+
+    List<Point> getAdjacentTiles() {
+        int x = this.x;
+        int y = this.y;
+    
+        List<Point> adjacentTiles = new ArrayList<>();
+    
+        // North tile
+        adjacentTiles.add(new Point(x, y - 1));
+        adjacentTiles.add(new Point(x, y - 2));
+    
+        // South tile
+        adjacentTiles.add(new Point(x, y + 1));
+        adjacentTiles.add(new Point(x, y + 2));
+    
+        // East tile
+        adjacentTiles.add(new Point(x + 1, y));
+        adjacentTiles.add(new Point(x + 2, y));
+    
+        // West tile
+        adjacentTiles.add(new Point(x - 1, y));
+        adjacentTiles.add(new Point(x - 2, y));
+    
+        // Diagonal tiles
+        adjacentTiles.add(new Point(x - 1, y - 1)); // Northwest
+        adjacentTiles.add(new Point(x + 1, y - 1)); // Northeast
+        adjacentTiles.add(new Point(x - 1, y + 1)); // Southwest
+        adjacentTiles.add(new Point(x + 1, y + 1)); // Southeast
+    
+        return adjacentTiles;
+    }
+    
 }

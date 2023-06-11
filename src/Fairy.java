@@ -27,7 +27,7 @@ public class Fairy extends Wiggler {
 
             if (this.moveToFairy(world, fairyTarget.get(), scheduler)) {
                 Sapling sapling = new Sapling(
-                    getSAPLING_KEY() + "_" + fairyTarget.get().getId(), tgtPos, ImageStore.getImageList(imageStore, getSAPLING_KEY()), getSAPLING_ACTION_ANIMATION_PERIOD(), getSAPLING_ACTION_ANIMATION_PERIOD(), 0, getSAPLING_HEALTH_LIMIT()
+                    getSAPLING_KEY() + "_" + fairyTarget.get().getId(), tgtPos, imageStore.getImageList(getSAPLING_KEY()), getSAPLING_ACTION_ANIMATION_PERIOD(), getSAPLING_ACTION_ANIMATION_PERIOD(), 0, getSAPLING_HEALTH_LIMIT()
                     );
                 world.addEntity(sapling);
                 sapling.scheduleActions(scheduler, world, imageStore);
