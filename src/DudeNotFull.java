@@ -21,7 +21,6 @@ public class DudeNotFull extends Dude {
     }
 
     private boolean moveToNotFull(WorldModel world, Wiggler target, EventScheduler scheduler) {
-        // TODO: target can be either tree or sapling deal with both cases not just the Tree case
         if (Point.adjacent(this.getPosition(), target.getPosition()) && target instanceof Tree) {
             int x = getResourceCount();
             setResourceCount(x + 1);

@@ -8,41 +8,46 @@ import java.util.stream.Stream;
 
 import processing.core.PImage;
 
-public class Fairy extends Wiggler {
-    static final String FAIRY_KEY = "fairy";
-    static final int FAIRY_ANIMATION_PERIOD = 0;
-    static final int FAIRY_ACTION_PERIOD = 1;
-    static final int FAIRY_NUM_PROPERTIES = 2;
+public class Worm extends Wiggler {
+    private static final String WORM_KEY = "worm";
+    private static final int WORM_ANIMATION_PERIOD = 0;
+    private static final int WORM_ACTION_PERIOD = 1;
+    private static final int WORM_NUM_PROPERTIES = 2;
 
-    public Fairy(String id, Point position, List<PImage> images, double actionPeriod, double animationPeriod) {
+    public Worm(String id, Point position, List<PImage> images, double actionPeriod, double animationPeriod) {
         super(id, position, images, actionPeriod, animationPeriod);
     }
 
-    @Override
-    public void executeActivityAction(WorldModel world, ImageStore imageStore, EventScheduler scheduler) {
-        Optional<Entity> fairyTarget = world.findNearest(this, getPosition(), new ArrayList<>(List.of(Stump.class)));
+    
 
-        if (fairyTarget.isPresent()) {
-            Point tgtPos = fairyTarget.get().getPosition();
-
-            if (this.moveToFairy(world, fairyTarget.get(), scheduler)) {
-                Sapling sapling = new Sapling(
-                    getSAPLING_KEY() + "_" + fairyTarget.get().getId(), tgtPos, imageStore.getImageList(getSAPLING_KEY()), getSAPLING_ACTION_ANIMATION_PERIOD(), getSAPLING_ACTION_ANIMATION_PERIOD(), 0, getSAPLING_HEALTH_LIMIT()
-                    );
-                world.addEntity(sapling);
-                sapling.scheduleActions(scheduler, world, imageStore);
-            }
-        }
-
-        scheduler.scheduleEvent(this, createActivityAction(world, imageStore), this.getActionPeriod());
+    public static String getWormKey() {
+        return WORM_KEY;
     }
 
-    private boolean moveToFairy(WorldModel world, Entity target, EventScheduler scheduler) {
+
+
+    public static int getWormAnimationPeriod() {
+        return WORM_ANIMATION_PERIOD;
+    }
+
+
+
+    public static int getWormActionPeriod() {
+        return WORM_ACTION_PERIOD;
+    }
+
+
+    public static int getWormNumProperties() {
+        return WORM_NUM_PROPERTIES;
+    }
+    
+
+    private boolean moveTo(WorldModel world, Entity target, EventScheduler scheduler) {
         if (Point.adjacent(this.getPosition(), target.getPosition())) {
             world.removeEntity(target, scheduler);
             return true;
         } else {
-            Point nextPos = this.nextPositionFairy(world, target.getPosition());
+            Point nextPos = this.nextPosition(world, target.getPosition());
     
             if (!this.getPosition().equals(nextPos)) {
                 world.moveEntity(scheduler, this, nextPos);
@@ -51,11 +56,11 @@ public class Fairy extends Wiggler {
         }
     }
 
-    private Point nextPositionFairy(WorldModel world, Point destPos) {
+    private Point nextPosition(WorldModel world, Point destPos) {
         Point newPos = this.getPosition();
         AStarStrategy pathingStrat = new AStarStrategy();
 
-        // Determine allowance **Fairies can pass through Stumps so we don't need to add: !world.getOccupancyCell(newPos) instanceof Stump
+        // Determine allowance
         Predicate<Point> canPassThrough = p -> world.withinBounds(p) && (!world.isOccupied(p));
         
         // Find reach and neighbors
@@ -73,8 +78,31 @@ public class Fairy extends Wiggler {
     }
 
     @Override
+    public void executeActivityAction(WorldModel world, ImageStore imageStore, EventScheduler scheduler) {
+        Optional<Entity> wormTarget = world.findNearest(this, this.getPosition(), new ArrayList<>(List.of(Dude.class)));
+
+        if (wormTarget.isPresent()) {
+            Point tgtPos = wormTarget.get().getPosition();
+
+            if (this.moveTo(world, wormTarget.get(), scheduler)) {
+                // delete dude
+                world.removeEntity(wormTarget.get(), scheduler);
+            }
+        }
+
+        scheduler.scheduleEvent(this, createActivityAction(world, imageStore), this.getActionPeriod());
+    }
+
+
+    @Override
     public void scheduleActions(EventScheduler scheduler, WorldModel world, ImageStore imageStore) {
         scheduler.scheduleEvent(this, this.createActivityAction(world, imageStore), this.getActionPeriod());
         scheduler.scheduleEvent(this, this.createAnimationAction(0), this.getAnimationPeriod());
     }
+
+
+
+
+
+    
 }

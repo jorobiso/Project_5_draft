@@ -31,7 +31,6 @@ public final class EventScheduler {
         this.currentTime = currentTime;
     }
 
-    // TODO: This uses a priority Queue implementation you can reference
     public EventScheduler() {
         this.eventQueue = new PriorityQueue<>(new EventComparator());
         this.pendingEvents = new HashMap<>();

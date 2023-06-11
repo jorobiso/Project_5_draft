@@ -87,34 +87,34 @@ public final class Point {
         }
     }
 
-    List<Point> getAdjacentTiles() {
-        int x = this.x;
-        int y = this.y;
-    
+    List<Point> getOrdinalTiles(WorldModel world) {
+        int[] dx = {-1, 1, 0, 0, -1, -1, 1, 1};
+        int[] dy = {0, 0, -1, 1, -1, 1, -1, 1};
+
         List<Point> adjacentTiles = new ArrayList<>();
-    
-        // North tile
-        adjacentTiles.add(new Point(x, y - 1));
-        adjacentTiles.add(new Point(x, y - 2));
-    
-        // South tile
-        adjacentTiles.add(new Point(x, y + 1));
-        adjacentTiles.add(new Point(x, y + 2));
-    
-        // East tile
-        adjacentTiles.add(new Point(x + 1, y));
-        adjacentTiles.add(new Point(x + 2, y));
-    
-        // West tile
-        adjacentTiles.add(new Point(x - 1, y));
-        adjacentTiles.add(new Point(x - 2, y));
-    
-        // Diagonal tiles
-        adjacentTiles.add(new Point(x - 1, y - 1)); // Northwest
-        adjacentTiles.add(new Point(x + 1, y - 1)); // Northeast
-        adjacentTiles.add(new Point(x - 1, y + 1)); // Southwest
-        adjacentTiles.add(new Point(x + 1, y + 1)); // Southeast
-    
+        for (int i = 0; i < dx.length; i++) {
+            Point p = new Point(this.x + dx[i], this.y + dy[i]);
+            if (world.withinBounds(p)) {
+                adjacentTiles.add(p);
+            }
+        }
+            
+        return adjacentTiles;
+    }
+
+
+    List<Point> getDiamondTiles(WorldModel world) {
+        int[] dx = {-1, 1, 0, 0, -1, -1, 1, 1, -2, 2, 0, 0};
+        int[] dy = {0, 0, -1, 1, -1, 1, -1, 1, 0, 0, -2, 2};
+
+        List<Point> adjacentTiles = new ArrayList<>();
+        for (int i = 0; i < dx.length; i++) {
+            Point p = new Point(this.x + dx[i], this.y + dy[i]);
+            if (world.withinBounds(p)) {
+                adjacentTiles.add(p);
+            }
+        }
+
         return adjacentTiles;
     }
     

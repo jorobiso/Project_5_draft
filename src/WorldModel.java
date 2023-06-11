@@ -218,6 +218,16 @@ public final class WorldModel {
         }
     }
 
+    public void parseWorm(String[] properties, Point pt, String id, ImageStore imageStore) {
+        if (properties.length == Worm.getWormNumProperties()) {
+            Entity worm = new Worm(id, pt, imageStore.getImageList("worm"), Double.parseDouble(properties[Worm.getWormActionPeriod()]), Double.parseDouble(properties[Worm.getWormAnimationPeriod()]));
+            tryAddEntity(worm);
+        }else{
+            throw new IllegalArgumentException(String.format("%s requires %d properties when parsing", Worm.getWormKey(), Worm.getWormNumProperties()));
+        }
+    }
+
+
     public void parseDude(String[] properties, Point pt, String id, ImageStore imageStore) {
         if (properties.length == Dude.getDUDE_NUM_PROPERTIES()) {
             DudeNotFull dude = new DudeNotFull(id, pt, imageStore.getImageList(Dude.getDUDE_KEY()), Integer.parseInt(properties[Dude.getDUDE_LIMIT()]), Dude.getDUDE_NUM_PROPERTIES(), Double.parseDouble(properties[Dude.getDUDE_ACTION_PERIOD()]), Double.parseDouble(properties[Dude.getDUDE_ANIMATION_PERIOD()]));
