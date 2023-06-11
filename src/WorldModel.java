@@ -211,7 +211,7 @@ public final class WorldModel {
 
     public void parseFairy(String[] properties, Point pt, String id, ImageStore imageStore) {
         if (properties.length == Fairy.getFAIRY_NUM_PROPERTIES()) {
-            Entity fairy = new Fairy(id, pt, ImageStore.getImageList(imageStore, "groot"), Double.parseDouble(properties[Fairy.getFAIRY_ACTION_PERIOD()]), Double.parseDouble(properties[Fairy.getFAIRY_ANIMATION_PERIOD()]));
+            Entity fairy = new Fairy(id, pt, ImageStore.getImageList(imageStore, "fairy"), Double.parseDouble(properties[Fairy.getFAIRY_ACTION_PERIOD()]), Double.parseDouble(properties[Fairy.getFAIRY_ANIMATION_PERIOD()]));
             tryAddEntity(fairy);
         }else{
             throw new IllegalArgumentException(String.format("%s requires %d properties when parsing", Fairy.getFAIRY_KEY(), Fairy.getFAIRY_NUM_PROPERTIES()));

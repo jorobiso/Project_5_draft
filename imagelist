@@ -8,10 +8,10 @@ groot images/groot1.png
 groot images/groot2.png
 groot images/groot3.png
 groot images/groot4.png
-icey images/iceSprite1.png
-icey images/iceSprite2.png
-icey images/iceSprite3.png
-icey images/iceSprite4.png
+sprite images/iceSprite1.png
+sprite images/iceSprite2.png
+sprite images/iceSprite3.png
+sprite images/iceSprite4.png
 fount images/fountain1.png
 fount images/fountain2.png
 fount images/fountain3.png
@@ -21,7 +21,9 @@ worm images/worm2.png
 worm images/worm3.png
 worm images/worm4.png
 worm images/worm5.png
-boil images/corruptedGround1.png
+boils images/corruptedGround1.png
+cwater images/corruptedWater-1.png
+ctree images/corruptedTree-1.png
 grass images/grass.png
 flowers images/flowers.png
 background_default images/none.bmp
