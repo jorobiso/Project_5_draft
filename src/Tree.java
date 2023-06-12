@@ -39,9 +39,7 @@ public class Tree extends Wiggler {
 
     @Override
     public void executeActivityAction(WorldModel world, ImageStore imageStore, EventScheduler scheduler) {
-
         if (!((Wiggler) this).transform(world, scheduler, imageStore)) {
-
             scheduler.scheduleEvent(this, this.createActivityAction(world, imageStore), this.getActionPeriod());
         }
     }
@@ -62,7 +60,7 @@ public class Tree extends Wiggler {
     public void scheduleActions(EventScheduler scheduler, WorldModel world, ImageStore imageStore) {
         scheduler.scheduleEvent(this, this.createActivityAction(world, imageStore), this.getActionPeriod());
         scheduler.scheduleEvent(this, this.createAnimationAction(0), this.getAnimationPeriod());
-}
+    }
 
 
     // private static Entity createTree(String id, Point position, double actionPeriod, double animationPeriod, int health, List<PImage> images) {

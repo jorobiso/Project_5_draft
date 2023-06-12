@@ -9,6 +9,13 @@
             "name": "VirtualWorld",
             "request": "launch",
             "mainClass": "VirtualWorld",
+            "projectName": "csc203-project05-Bolt259-1_892edf7"
+        },
+        {
+            "type": "java",
+            "name": "VirtualWorld",
+            "request": "launch",
+            "mainClass": "VirtualWorld",
             "projectName": "csc203-project05-Bolt259_9ec6e113"
         },
         {

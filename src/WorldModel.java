@@ -211,21 +211,21 @@ public final class WorldModel {
 
     public void parseFairy(String[] properties, Point pt, String id, ImageStore imageStore) {
         if (properties.length == Fairy.getFAIRY_NUM_PROPERTIES()) {
-            Entity fairy = new Fairy(id, pt, imageStore.getImageList("fairy"), Double.parseDouble(properties[Fairy.getFAIRY_ACTION_PERIOD()]), Double.parseDouble(properties[Fairy.getFAIRY_ANIMATION_PERIOD()]));
+            Entity fairy = new Fairy(id, pt, imageStore.getImageList(Fairy.getFAIRY_KEY()), Double.parseDouble(properties[Fairy.getFAIRY_ACTION_PERIOD()]), Double.parseDouble(properties[Fairy.getFAIRY_ANIMATION_PERIOD()]));
             tryAddEntity(fairy);
         }else{
             throw new IllegalArgumentException(String.format("%s requires %d properties when parsing", Fairy.getFAIRY_KEY(), Fairy.getFAIRY_NUM_PROPERTIES()));
         }
     }
 
-    public void parseWorm(String[] properties, Point pt, String id, ImageStore imageStore) {
-        if (properties.length == Worm.getWormNumProperties()) {
-            Entity worm = new Worm(id, pt, imageStore.getImageList("worm"), Double.parseDouble(properties[Worm.getWormActionPeriod()]), Double.parseDouble(properties[Worm.getWormAnimationPeriod()]));
-            tryAddEntity(worm);
-        }else{
-            throw new IllegalArgumentException(String.format("%s requires %d properties when parsing", Worm.getWormKey(), Worm.getWormNumProperties()));
-        }
-    }
+    // public void parseWorm(String[] properties, Point pt, String id, ImageStore imageStore) {
+    //     if (properties.length == Worm.getWormNumProperties()) {
+    //         Entity worm = new Worm(id, pt, imageStore.getImageList(Worm.getWormKey()), Double.parseDouble(properties[Worm.getWormActionPeriod()]), Double.parseDouble(properties[Worm.getWormAnimationPeriod()]));
+    //         tryAddEntity(worm);
+    //     }else{
+    //         throw new IllegalArgumentException(String.format("%s requires %d properties when parsing", Worm.getWormKey(), Worm.getWormNumProperties()));
+    //     }
+    // }
 
 
     public void parseDude(String[] properties, Point pt, String id, ImageStore imageStore) {

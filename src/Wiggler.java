@@ -48,6 +48,8 @@ public abstract class Wiggler extends Schedulable implements ActionInterface{
             return ((Tree) this).transform(world, scheduler, imageStore);
         } else if (this instanceof Sapling) {
             return ((Sapling) this).transform(world, scheduler, imageStore);
+        } else if (this instanceof Twistedoak) {
+            return ((Twistedoak) this).transform(world, scheduler, imageStore);
         } else {
             throw new UnsupportedOperationException(String.format("transformPlant not supported for %s", this));
         }

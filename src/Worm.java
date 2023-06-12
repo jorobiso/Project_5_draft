@@ -10,8 +10,8 @@ import processing.core.PImage;
 
 public class Worm extends Wiggler {
     private static final String WORM_KEY = "worm";
-    private static final int WORM_ANIMATION_PERIOD = 0;
-    private static final int WORM_ACTION_PERIOD = 1;
+    private static final double WORM_ANIMATION_PERIOD = 0.4;
+    private static final double WORM_ACTION_PERIOD = 1;
     private static final int WORM_NUM_PROPERTIES = 2;
 
     public Worm(String id, Point position, List<PImage> images, double actionPeriod, double animationPeriod) {
@@ -26,13 +26,13 @@ public class Worm extends Wiggler {
 
 
 
-    public static int getWormAnimationPeriod() {
+    public static double getWormAnimationPeriod() {
         return WORM_ANIMATION_PERIOD;
     }
 
 
 
-    public static int getWormActionPeriod() {
+    public static double getWormActionPeriod() {
         return WORM_ACTION_PERIOD;
     }
 
