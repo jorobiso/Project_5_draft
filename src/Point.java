@@ -102,6 +102,21 @@ public final class Point {
         return adjacentTiles;
     }
 
+    List<Point> getSpreadTiles(WorldModel world) {
+        int[] dx = {-2, -2, -1, -1, 0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 4};
+        int[] dy = {-2, 0, -1, 1, -2, -1, 1, 2, -1, 0, 2, -2, 0, 2, -3};
+
+        List<Point> adjacentTiles = new ArrayList<>();
+        for (int i = 0; i < dx.length; i++) {
+            Point p = new Point(this.x + dx[i], this.y + dy[i]);
+            if (world.withinBounds(p)) {
+                adjacentTiles.add(p);
+            }
+        }
+            
+        return adjacentTiles;
+    }
+
 
     List<Point> getDiamondTiles(WorldModel world) {
         int[] dx = {-1, 1, 0, 0, -1, -1, 1, 1, -2, 2, 0, 0};

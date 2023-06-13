@@ -12,7 +12,6 @@ public class Worm extends Wiggler {
     private static final String WORM_KEY = "worm";
     private static final double WORM_ANIMATION_PERIOD = 0.4;
     private static final double WORM_ACTION_PERIOD = 1;
-    private static final int WORM_NUM_PROPERTIES = 2;
 
     public Worm(String id, Point position, List<PImage> images, double actionPeriod, double animationPeriod) {
         super(id, position, images, actionPeriod, animationPeriod);
@@ -34,11 +33,6 @@ public class Worm extends Wiggler {
 
     public static double getWormActionPeriod() {
         return WORM_ACTION_PERIOD;
-    }
-
-
-    public static int getWormNumProperties() {
-        return WORM_NUM_PROPERTIES;
     }
     
 
@@ -87,6 +81,7 @@ public class Worm extends Wiggler {
             if (this.moveTo(world, wormTarget.get(), scheduler)) {
                 // delete dude
                 world.removeEntity(wormTarget.get(), scheduler);
+                // TODO: spawn CocoonSpore
             }
         }
 

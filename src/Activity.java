@@ -2,11 +2,6 @@ public class Activity extends Action {
     private WorldModel world;
     private ImageStore imageStore;
 
-    
-    // public Activity(WorldModel world, ImageStore imageStore) {
-    //     this.world = world;
-    //     this.imageStore = imageStore;
-    // }
 
     public Activity(Entity entity, WorldModel world, ImageStore imageStore) {
         super(entity);

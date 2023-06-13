@@ -27,7 +27,8 @@ public class Phenomenon {
                         world.removeEntity(world.getOccupancyCell(p), scheduler);
                     }
                     else if (world.getOccupancyCell(p) instanceof Tree) {
-                        Twistedoak twistedoak = new Twistedoak(Twistedoak.getTwistedOakKey(), p, imageStore.getImageList("toak"), Twistedoak.getTwistedoakactionanimationperiod(), Twistedoak.getTwistedoakactionanimationperiod(), 3);
+                        Twistedoak twistedoak = new Twistedoak(Twistedoak.getTwistedOakKey(), p, imageStore.getImageList("toak"), Twistedoak.getTwistedoakactionanimationperiod(), Twistedoak.getTwistedoakactionanimationperiod(), Twistedoak.getTwistedoakHealth());
+                        twistedoak.scheduleActions(scheduler, world, imageStore);
                         world.removeEntity(world.getOccupancyCell(p), scheduler);
                         world.addEntity(twistedoak);
                     }

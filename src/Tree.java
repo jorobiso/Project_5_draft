@@ -8,12 +8,6 @@ public class Tree extends Wiggler {
     public static final int TREE_ACTION_PERIOD = 1;
     public static final int TREE_HEALTH = 2;
     public static final int TREE_NUM_PROPERTIES = 3;
-    // public final double TREE_ANIMATION_MAX = 0.600;
-    // public final double TREE_ANIMATION_MIN = 0.050;
-    // public final double TREE_ACTION_MAX = 1.400;
-    // public final double TREE_ACTION_MIN = 1.000;
-    // public final int TREE_HEALTH_MAX = 3;
-    // public final int TREE_HEALTH_MIN = 1;
     private int health;
 
 
@@ -61,12 +55,6 @@ public class Tree extends Wiggler {
         scheduler.scheduleEvent(this, this.createActivityAction(world, imageStore), this.getActionPeriod());
         scheduler.scheduleEvent(this, this.createAnimationAction(0), this.getAnimationPeriod());
     }
-
-
-    // private static Entity createTree(String id, Point position, double actionPeriod, double animationPeriod, int health, List<PImage> images) {
-    //     return new Entity(EntityKind.TREE, id, position, images, 0, 0, actionPeriod, animationPeriod, health, 0);
-    // }
-
 
     
 }
