@@ -93,9 +93,9 @@ public final class VirtualWorld extends PApplet {
         // adds portal, corrupts environment, and spawns worms
         Phenomenon.terraform("portal", world, scheduler, imageStore, pressed);
 
-        // this should spawn in groot and tree on second click
-        Phenomenon.terraform("groot", world, scheduler, imageStore, pressed);
-    }
+//         // this should spawn in groot and tree on second click
+//         Phenomenon.terraform("groot", world, scheduler, imageStore, pressed);
+//     }
 
     public void scheduleActions(WorldModel world, EventScheduler scheduler, ImageStore imageStore) {
         for (Entity entity : world.entities) {
