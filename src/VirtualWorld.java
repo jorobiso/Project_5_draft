@@ -89,7 +89,12 @@ public final class VirtualWorld extends PApplet {
                 System.out.println(entity.getId() + ": " + entity.getClass() + " : " + "0");
             }
         }
+
+        // adds portal, corrupts environment, and spawns worms
         Phenomenon.terraform("portal", world, scheduler, imageStore, pressed);
+
+        // this should spawn in groot and tree on second click
+        Phenomenon.terraform("groot", world, scheduler, imageStore, pressed);
     }
 
     public void scheduleActions(WorldModel world, EventScheduler scheduler, ImageStore imageStore) {
