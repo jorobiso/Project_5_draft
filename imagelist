@@ -1,3 +1,4 @@
+homeTree images/homeTree.png
 house images/house.bmp 255 255 255 0
 obstacle images/water0.png
 obstacle images/water1.png
