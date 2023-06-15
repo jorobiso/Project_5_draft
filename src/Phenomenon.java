@@ -71,7 +71,10 @@ public class Phenomenon {
 
 
             case "sprite":
+            // not particularly needed
+
             case "groot":
+            // TODO: add hometree for groot and make groot spawn
         }
     }
 }
