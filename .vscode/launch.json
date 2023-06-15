@@ -9,6 +9,13 @@
             "name": "VirtualWorld",
             "request": "launch",
             "mainClass": "VirtualWorld",
+            "projectName": "Project_5_draft-1_9867f109"
+        },
+        {
+            "type": "java",
+            "name": "VirtualWorld",
+            "request": "launch",
+            "mainClass": "VirtualWorld",
             "projectName": "Project_5_draft_73c580a5"
         },
         {
